@@ -23,6 +23,10 @@ class UltraSyncDataUpdateCoordinator(DataUpdateCoordinator):
             user=config[CONF_USERNAME],
             pin=config[CONF_PIN],
             host=config[CONF_HOST],
+            online=config[CONF_ONLINE],
+            serial_number=config[CONF_SERIAL_NUMBER],
+            passcode=config[CONF_PASSCODE],
+            user_agent="UltraConnect/0487 CFNetwork/1474 Darwin/23.0.0",
         )
 
         self._init = False
