@@ -9,10 +9,9 @@
           "host": "[%key:common::config_flow::data::host%]",
           "username": "[%key:common::config_flow::data::username%]",
           "pin": "[%key:common::config_flow::data::pin%]",
-          "online": "[%key:common::config_flow::data::online%]",
-          "serial_number": "[%key:common::config_flow::data::serial_number%]",
-          "passcode": "[%key:common::config_flow::data::passcode%]",
-          "user_agent": "[%key:common::config_flow::data::user_agent%]"
+          "online": "Use Cloud Login?",
+          "serial_number": "Serial Number",
+          "passcode": "Web Access Passcode"
         }
       }
     },
