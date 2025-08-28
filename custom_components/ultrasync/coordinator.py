@@ -9,7 +9,7 @@ from homeassistant.helpers.dispatcher import async_dispatcher_send
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 import ultrasync
 
-from .const import DOMAIN, SENSOR_UPDATE_LISTENER
+from .const import DOMAIN, SENSOR_UPDATE_LISTENER, CONF_ONLINE, CONF_PASSCODE, CONF_SERIAL_NUMBER
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -23,9 +23,9 @@ class UltraSyncDataUpdateCoordinator(DataUpdateCoordinator):
             user=config[CONF_USERNAME],
             pin=config[CONF_PIN],
             host=config[CONF_HOST],
-            online=config[CONF_ONLINE],
-            serial_number=config[CONF_SERIAL_NUMBER],
-            passcode=config[CONF_PASSCODE],
+            online=config.get(CONF_ONLINE, False),
+            serial_number=config.get(CONF_SERIAL_NUMBER, None),
+            passcode=config.get(CONF_PASSCODE, None),
             user_agent="UltraConnect/0487 CFNetwork/1474 Darwin/23.0.0",
         )
 
