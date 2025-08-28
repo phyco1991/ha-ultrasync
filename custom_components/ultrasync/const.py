@@ -5,6 +5,11 @@ DOMAIN = "ultrasync"
 # Scan Time (in seconds)
 DEFAULT_SCAN_INTERVAL = 1
 
+# Additional Values
+CONF_ONLINE = "False"
+CONF_SERIAL_NUMBER = "serial_number"
+CONF_PASSCODE = "passcode"
+
 DEFAULT_NAME = "UltraSync"
 
 # Services
