@@ -9,16 +9,13 @@ from homeassistant.const import (
     CONF_PIN,
     CONF_SCAN_INTERVAL,
     CONF_USERNAME,
-    CONF_ONLINE,
-    CONF_SERIAL_NUMBER,
-    CONF_PASSCODE,
 )
 from homeassistant.core import callback, HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 import ultrasync
 import voluptuous as vol
 
-from .const import DEFAULT_NAME, DEFAULT_SCAN_INTERVAL
+from .const import DEFAULT_NAME, DEFAULT_SCAN_INTERVAL, CONF_PASSCODE, CONF_SERIAL_NUMBER, CONF_ONLINE
 from .const import DOMAIN  # pylint: disable=unused-import
 
 _LOGGER = logging.getLogger(__name__)
@@ -93,10 +90,11 @@ class UltraSyncConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     vol.Required(CONF_HOST): str,
                     vol.Required(CONF_USERNAME): str,
                     vol.Required(CONF_PIN): str,
-                    vol.Optional(CONF_ONLINE, default=False): bool
+                    vol.Optional(CONF_ONLINE, default=current_data.get(CONF_ONLINE, False)): bool,
                 }
-            )
-            return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
+        )
+        
+        return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
 
         async def async_step_cloud(
             self, user_input: Optional[ConfigType] = None
@@ -135,7 +133,7 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
 
     def __init__(self, config_entry):
         """Initialize options flow."""
-        self.config_entry = config_entry
+        self._config_entry = config_entry
         self._user_input: Dict[str, Any] = {}
 
     async def async_step_init(self, user_input: Optional[ConfigType] = None):
@@ -143,8 +141,8 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
         errors = {}
 
         current_data = {
-            **self.config_entry.data,
-            **self.config_entry.options,
+            **self._config_entry.data,
+            **self._config_entry.options,
         }
         
         if user_input is not None:
@@ -182,8 +180,8 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
 
         # Prefill cloud fields from existing data if available
         current_data = {
-            **self.config_entry.data,
-            **self.config_entry.options,
+            **self._config_entry.data,
+            **self._config_entry.options,
         }
 
         schema = vol.Schema(
