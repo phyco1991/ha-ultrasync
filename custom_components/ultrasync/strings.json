@@ -10,7 +10,7 @@
           "host": "[%key:common::config_flow::data::host%]",
           "username": "[%key:common::config_flow::data::username%]",
           "pin": "[%key:common::config_flow::data::pin%]",
-          "online": "Use Cloud Login?"
+          "online": "Use Cloud Login"
         }
       },
       "cloud": {
