@@ -141,6 +141,11 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
     async def async_step_init(self, user_input: Optional[ConfigType] = None):
         """Manage UltraSync options."""
         errors = {}
+
+        current_data = {
+            **self.config_entry.data,
+            **self.config_entry.options,
+        }
         
         if user_input is not None:
             if user_input.get(CONF_ONLINE, False):
@@ -152,16 +157,16 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
 
         schema = vol.Schema(
             {
+                vol.Required(CONF_HOST, default=current_data.get(CONF_HOST, "")): str,
+                vol.Required(CONF_USERNAME, default=current_data.get(CONF_USERNAME, "")): str,
+                vol.Required(CONF_PIN, default=current_data.get(CONF_PIN, "")): str,
+                vol.Optional(
+                    CONF_ONLINE, default=current_data.get(CONF_ONLINE, False)
+                ): bool,
                 vol.Optional(
                     CONF_SCAN_INTERVAL,
-                    default=self.config_entry.options.get(
-                        CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
-                    ),
+                    default=current_data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
                 ): int,
-                vol.Optional(
-                    CONF_ONLINE,
-                    default=self.config_entry.options.get(CONF_ONLINE, False)
-                ): bool,
             }
         )
 
@@ -172,15 +177,19 @@ class UltraSyncOptionsFlowHandler(config_entries.OptionsFlow):
         errors = {}
 
         if user_input is not None:
-            # Merge first + second step and save
             all_data = {**self._user_input, **user_input}
             return self.async_create_entry(title="", data=all_data)
 
-        # Cloud-specific fields
+        # Prefill cloud fields from existing data if available
+        current_data = {
+            **self.config_entry.data,
+            **self.config_entry.options,
+        }
+
         schema = vol.Schema(
             {
-                vol.Required(CONF_SERIAL_NUMBER): str,
-                vol.Required(CONF_PASSCODE): str,
+                vol.Required(CONF_SERIAL_NUMBER, default=current_data.get(CONF_SERIAL_NUMBER, "")): str,
+                vol.Required(CONF_PASSCODE, default=current_data.get(CONF_PASSCODE, "")): str,
             }
         )
 
