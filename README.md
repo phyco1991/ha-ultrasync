@@ -1,4 +1,5 @@
-# UltraSync Integration for Home Assistant
+# UltraSync Integration for Home Assistant - DEVELOPMENT/RESEARCH BUILD ONLY
+**This build is not released, and should only be used for development and research purposes**
 
 [![Paypal](https://img.shields.io/badge/paypal-donate-green.svg)](https://paypal.me/lead2gold)
 [![Follow](https://img.shields.io/twitter/follow/l2gnux)](https://twitter.com/l2gnux/)<br>
@@ -7,17 +8,11 @@
 
 ![ZeroWire Hub Image](https://raw.githubusercontent.com/caronc/ultrasync/master/static/zerowire_hub.jpeg)
 
-Interlogix ZeroWire and Hills ComNav (NX-595E) UltraSync Security Panel for Integration for Home Assistant Community Store (HACS)
-
-This is based on a [a Pull Request I created here](https://github.com/home-assistant/core/pull/42549) to implement [my version of a UltraSync security panel](https://github.com/caronc/ultrasync) into Home Assistant (HA).
-
-Unfortunately it's taking a little bit of time to get merged due to the significant backlog the HA team already has to deal with. The request comes from [a thread within the HA Community Forum](https://community.home-assistant.io/t/interlogix-ultrasync/51464) asking for it's support.
-
-This repository simply prepares a custom component that one can use early while we wait.  The other advantage of this repository is that new things can be tried and tested before they are merged into Home Assistant.
+UltraSync Security Panel Integration for Home Assistant Community Store (HACS)
 
 ## Installation
 
-You can only be logged into the ComNav/ZeroWire hub with the same user *once*; a subsequent login with the same user logs out the other. Since this tool/software actively polls and maintains a login session to your Hub, it can prevent you from being able to log into at the same time elsewhere (via it's website).  **It is strongly recommended that you create a second user account on your Hub dedicated to just this service.**
+You can generally only be logged into the alarm system with the same user *once*; a subsequent login with the same user logs out the other. Since this tool actively polls and maintains a login session to your system, it can prevent you from being able to log into at the same time elsewhere (via it's website).  **It is strongly recommended that you create a second user account on your system dedicated to just this service.**
 
 ### From HACS
 
@@ -37,7 +32,7 @@ You can only be logged into the ComNav/ZeroWire hub with the same user *once*; a
 
 Go to the integrations page in your configuration and click on new **Integration** -> **UltraSync**.
 
-**Note**: You can only be logged into the ZeroWire/UltraSync hub with the same user once; a subsequent login with the same user logs out the other. Since Home Assistant (HA) actively polls and maintains a login session to this Hub, it can prevent you from being able to log into at the same time elsewhere (via it's website). It is strongly recommended that you create a second user account on your Hub dedicated for just HA.
+**Note**: You can generally only be logged into the alarm system with the same user *once*; a subsequent login with the same user logs out the other. Since HA actively polls and maintains a login session to your system, it can prevent you from being able to log into at the same time elsewhere (via it's website).  **It is strongly recommended that you create a second user account on your system dedicated to just HA.**
 
 ### Sensor
 
