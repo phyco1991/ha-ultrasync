@@ -24,7 +24,9 @@
     },
     "error": {
       "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
-      "unknown": "[%key:common::config_flow::error::unknown%]"
+      "unknown": "[%key:common::config_flow::error::unknown%]",
+	  "invalid_pin": "PIN must be numeric.",
+      "invalid_pin_length": "PIN must be 4–8 digits."
     },
     "abort": {
       "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
@@ -32,20 +34,18 @@
   },
   "options": {
     "step": {
-      "init": {
-        "title": "UltraSync Options",
-        "description": "Update your UltraSync Hub settings.",
+      "init": {\
+        "description": "Update your UltraSync Options.",
         "data": {
           "host": "[%key:common::config_flow::data::host%]",
           "username": "[%key:common::config_flow::data::username%]",
           "pin": "[%key:common::config_flow::data::pin%]",
-          "online": "Use Cloud Login?",
+          "online": "Use Cloud Login",
           "scan_interval": "Update frequency (seconds)"
         }
       },
       "cloud": {
-        "title": "Cloud Login Options",
-        "description": "Update your UltraSync cloud login details.",
+        "description": "Configure your UltraSync cloud login details.",
         "data": {
           "serial_number": "Serial Number",
           "passcode": "Web Access Passcode"
